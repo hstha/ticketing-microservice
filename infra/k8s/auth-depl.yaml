@@ -24,7 +24,7 @@ metadata:
 spec:
   selector:
     app: auth
-  posts:
+  ports:
     - name: auth
       protocol: TCP
       port: 3000
