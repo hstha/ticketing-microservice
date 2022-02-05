@@ -1,23 +1,21 @@
-import express from "express";
-import { json } from "body-parser";
+import mongoose from "mongoose";
+import { isEnvPresent } from "./services";
+import { app } from "./app";
 
-import { currentUserRouter, signIn, signOut, signUp } from "./routes";
-import { errorHandler } from "./middleware/error-handler";
-import { NotFound } from "./errors";
+const start = async () => {
+  if (!isEnvPresent(["JWT_KEY"])) {
+    throw new Error("All the envrioment must be defined");
+  }
 
-const app = express();
-app.use(json());
-app.use(currentUserRouter);
-app.use(signIn);
-app.use(signOut);
-app.use(signUp);
+  try {
+    await mongoose.connect("mongodb://auth-mongo-clusterip-srv:27017/auth");
+    console.log("DB connected");
+  } catch (err) {
+    console.error(err);
+  }
+  app.listen(3000, () => {
+    console.log("Auth server is running");
+  });
+};
 
-app.get("*", async (req, res, next) => {
-  next(new NotFound("Path not found"));
-});
-
-app.use(errorHandler);
-
-app.listen(3000, () => {
-  console.log("Auth server is running");
-});
+start();

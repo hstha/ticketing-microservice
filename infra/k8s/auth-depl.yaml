@@ -15,6 +15,13 @@ spec:
       containers:
         - name: auth
           image: hstha/ticketing/auth
+          env:
+            # please run kubectl create secret generic jwt-secret --from-literal=JWT_KEY=...
+            - name: JWT_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: jwt-secret
+                  key: JWT_KEY
 
 ---
 apiVersion: v1
