@@ -13,7 +13,7 @@ export class Password {
 
   static async compare(storedPassword: string, suppliedPassword: string) {
     const [hashedPassword, salt] = storedPassword.split(".");
-    const buffer = await this.createBuffer(suppliedPassword, salt);
+    const buffer = await this.createBuffer(salt, suppliedPassword);
 
     return buffer.toString("hex") === hashedPassword;
   }

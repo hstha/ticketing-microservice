@@ -1,14 +1,19 @@
 import axios from "axios";
 import { useState } from "react";
 
-export const useRequest = ({ url, method, body }) => {
+export const useRequest = ({ url, method, body, onSuccess }) => {
   const [errors, setErrors] = useState(null);
 
   const doRequest = async () => {
     setErrors(null);
     try {
       const response = await axios[method](url, body);
-      return response.data;
+
+      if (onSuccess && typeof onSuccess === "function") {
+        onSuccess(response.data);
+      } else {
+        return response.data;
+      }
     } catch (err) {
       const error = {};
       if (
