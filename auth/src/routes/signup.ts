@@ -43,7 +43,7 @@ router.post(
         jwt: jwtToken,
       };
 
-      res.status(201).send(user);
+      return res.status(201).json(user);
     } catch (err) {
       console.log(err);
     }
