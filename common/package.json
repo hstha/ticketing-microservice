@@ -1,5 +1,5 @@
 {
-  "name": "common",
+  "name": "@hs-ticketing/common",
   "version": "1.0.0",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
@@ -18,6 +18,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "cookie-session": "^2.0.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",
     "jsonwebtoken": "^8.5.1"
