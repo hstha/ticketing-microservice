@@ -1,5 +1,6 @@
 import express from "express";
-import { currentUser } from "../middleware";
+// use as npm package
+import { currentUser } from "../../../common/src";
 
 const router = express.Router();
 

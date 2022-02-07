@@ -1,9 +1,9 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
-import { BadRequest } from "../errors";
+// use as npm package
+import { BadRequest, validateRequest } from "../../../common/src";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
-import { validateRequest } from "../middleware";
 
 const router = express.Router();
 

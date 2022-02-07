@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
-import { BadRequest } from "../errors";
-import { validateRequest } from "../middleware";
+// use as npm package
+import { BadRequest, validateRequest } from "../../../common/src";
 import { User } from "../models/user";
 import { Password } from "../services";
 

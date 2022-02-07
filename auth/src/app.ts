@@ -2,8 +2,8 @@ import express from "express";
 import { json } from "body-parser";
 import cookieSession from "cookie-session";
 import { currentUserRouter, signIn, signOut, signUp } from "./routes";
-import { errorHandler } from "./middleware/error-handler";
-import { NotFound } from "./errors";
+// use as npm package
+import { errorHandler, NotFound } from "../../common/src";
 
 const app = express();
 app.set("trust proxy", true);
