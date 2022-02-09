@@ -25,7 +25,6 @@ class Server {
 
   createRoute() {
     this._router = express.Router();
-    this._router;
   }
 
   start(port: number, cb: () => void) {
@@ -46,6 +45,10 @@ class Server {
 
   set<T>(name: string, value: T) {
     this._app!.set(name, value);
+  }
+
+  getApp() {
+    return this._app;
   }
 
   getRouter() {
