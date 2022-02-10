@@ -23,7 +23,7 @@ export class RequestValidationError extends CustomError {
   }
 
   static mapErrors(
-    errors: { [key: string]: string }[],
+    errors: any[],
     mappedKeys: { message: string; field?: string }
   ) {
     return errors.map((error) => ({

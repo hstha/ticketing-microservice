@@ -4,7 +4,7 @@ export type ErrorType =
   | "not-found-error"
   | "internal-server-error";
 
-export type StatusCodeType = 400 | 401 | 404 | 500;
+export type ErrorStatusCodeType = 400 | 401 | 404 | 500;
 
 export const errorTypeWithCode = {
   "bad-request-error": 400,

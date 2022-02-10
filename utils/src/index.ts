@@ -1,5 +1,3 @@
-import Server from "./server/Server";
-
+export * from "./server";
 export * from "./helper";
 export * from "./Password";
-export { Server };

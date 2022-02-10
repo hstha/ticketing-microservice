@@ -1,16 +1,6 @@
 import express from "express";
-import {
-  MethodType,
-  NextFunctionParam,
-  RequestParam,
-  ResponseParam,
-} from "./interface/Server-types";
-
-type RouteHandlerType = (
-  req: RequestParam,
-  res: ResponseParam,
-  next: NextFunctionParam
-) => any;
+import { SERVER_TYPE } from "./app-constant";
+import { MethodType, RouteHandlerType } from "./interface/Server-types";
 
 class Server {
   private _app: express.Application | undefined;
@@ -28,7 +18,10 @@ class Server {
   }
 
   start(port: number, cb: () => void) {
-    this._app!.listen(port, cb);
+    if (!this._app) {
+      throw new Error(SERVER_TYPE["NO-APP"] || "Something went wrong");
+    }
+    this._app.listen(port, cb);
   }
 
   static getInstance(): Server {
@@ -40,11 +33,17 @@ class Server {
   }
 
   use(cb: Function) {
-    this._app!.use(cb());
+    if (!this._app) {
+      throw new Error(SERVER_TYPE["NO-APP"] || "Something went wrong");
+    }
+    this._app.use(cb());
   }
 
   set<T>(name: string, value: T) {
-    this._app!.set(name, value);
+    if (!this._app) {
+      throw new Error(SERVER_TYPE["NO-APP"] || "Something went wrong");
+    }
+    this._app.set(name, value);
   }
 
   getApp() {
@@ -55,16 +54,27 @@ class Server {
     return this._router;
   }
 
-  requestApp(url: string, method: MethodType, ...handler: RouteHandlerType[]) {
-    this._app![method](url, handler);
+  requestApp(
+    url: string,
+    method: MethodType,
+    ...handler: RouteHandlerType[] | Array<any>
+  ) {
+    if (!this._app) {
+      throw new Error(SERVER_TYPE["NO-APP"] || "Something went wrong");
+    }
+    this._app[method](url, handler);
   }
 
   requestRoute(
     url: string,
     method: MethodType,
-    ...handler: RouteHandlerType[]
+    ...handler: RouteHandlerType[] | Array<any>
   ) {
-    this._router![method](url, handler);
+    if (!this._router) {
+      throw new Error(SERVER_TYPE["NO-ROUTE"] || "Something went wrong");
+    }
+
+    this._router[method](url, handler);
   }
 }
 
