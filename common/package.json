@@ -1,6 +1,6 @@
 {
   "name": "@hstha-ticketing/common",
-  "version": "1.0.1",
+  "version": "1.0.17",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
   "files": [
@@ -13,7 +13,8 @@
   },
   "scripts": {
     "clean": "del ./build/*",
-    "build": "yarn run clean && tsc"
+    "build": "yarn run clean && tsc",
+    "patch": "yarn run build && npm version patch"
   },
   "devDependencies": {
     "@types/express": "^4.17.13",
@@ -23,6 +24,7 @@
     "typescript": "^4.5.5"
   },
   "dependencies": {
+    "@h-stha/utils": "^1.0.12",
     "cookie-session": "^2.0.0",
     "express": "^4.17.2",
     "express-validator": "^6.14.0",

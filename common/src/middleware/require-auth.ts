@@ -1,13 +1,17 @@
-import { Request, Response, NextFunction } from "express";
-import { NotAuthorizedError } from "../errors";
+import {
+  NextFunctionParam,
+  RequestParam,
+  ResponseParam,
+} from "@h-stha/utils/build/server/interface/Server-types";
+import { ValidationError } from "@h-stha/utils/build/server/errors";
 
 export const requireAuth = (
-  req: Request,
-  res: Response,
-  next: NextFunction
+  req: RequestParam,
+  res: ResponseParam,
+  next: NextFunctionParam
 ) => {
   if (!req.currentUser) {
-    throw new NotAuthorizedError();
+    throw new ValidationError("Not Authorized", "not-authorized-error");
   }
 
   next();

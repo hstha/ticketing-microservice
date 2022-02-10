@@ -1,28 +1,24 @@
 import { Request, Response, NextFunction } from "express";
-import { body, validationResult } from "express-validator";
-import { RequestValidationError } from "../errors";
+import { validationResult } from "express-validator";
+import { RequestValidationError } from "@h-stha/utils/build/server/errors";
 
 export const validateRequest = (
   req: Request,
   res: Response,
   next: NextFunction
 ) => {
-  const errors = validationResult(req);
+  // const errors = validationResult(req);
+  let errors = validationResult(req);
+  const convertedMessage = RequestValidationError.mapErrors(errors.array(), {
+    message: "msg",
+    field: "field",
+  });
   if (!errors.isEmpty()) {
-    throw new RequestValidationError(errors.array());
+    throw new RequestValidationError(
+      "Request validation error",
+      convertedMessage
+    );
   }
 
   next();
 };
-
-export const validateSignup = (
-  req: Request,
-  res: Response,
-  next: NextFunction
-) => [
-  body("email").isEmail().withMessage("Email must be valid"),
-  body("password")
-    .trim()
-    .isLength({ min: 4, max: 20 })
-    .withMessage("Password must be between 4 and 20 characters"),
-];
