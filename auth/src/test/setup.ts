@@ -1,7 +1,7 @@
 import { MongoMemoryServer } from "mongodb-memory-server";
 import mongooes from "mongoose";
 import request from "supertest";
-import { app } from "../app";
+import { App } from "../app";
 
 let mongo: MongoMemoryServer;
 
@@ -25,11 +25,15 @@ afterAll(async () => {
   await mongooes.connection.close();
 });
 
+export function createApp() {
+  return new App().getApp();
+}
+
 export const signin = async () => {
   const email = "test@test.com";
   const password = "password";
 
-  const response = await request(app)
+  const response = await request(createApp())
     .post("/api/users/signup")
     .send({
       email,

@@ -1,11 +1,10 @@
 import request from "supertest";
-import { app } from "../../app";
-import { signin } from "../../test/setup";
+import { createApp, signin } from "../../test/setup";
 
 it("responds with details about the current user", async () => {
   const cookie = await signin();
 
-  const response = await request(app)
+  const response = await request(createApp())
     .get("/api/users/currentuser")
     .set("Cookie", cookie)
     .send()
@@ -15,7 +14,7 @@ it("responds with details about the current user", async () => {
 });
 
 it("responds with null if not authenticated", async () => {
-  const response = await request(app)
+  const response = await request(createApp())
     .get("/api/users/currentuser")
     .send()
     .expect(200);

@@ -1,9 +1,10 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 // use as npm package
-import { BadRequest, validateRequest } from "../../../common/src";
+import { validateRequest } from "@hstha-ticketing/common";
 import { User } from "../models/user";
 import jwt from "jsonwebtoken";
+import { ValidationError } from "@h-stha/utils";
 
 const router = express.Router();
 
@@ -17,11 +18,11 @@ router.post(
       .withMessage("Password must be between 4 and 20 characters"),
   ],
   validateRequest,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
     const existing = await User.findOne({ email });
     if (existing) {
-      throw new BadRequest("Email in use");
+      throw new ValidationError("Email in use", "bad-request-error");
     }
 
     const user = User.build({ email, password });
@@ -45,7 +46,7 @@ router.post(
 
       return res.status(201).json(user);
     } catch (err) {
-      console.log(err);
+      next(err);
     }
   }
 );

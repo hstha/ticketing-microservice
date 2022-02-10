@@ -1,9 +1,9 @@
 import request from "supertest";
-import { app } from "../../app";
+import { createApp } from "../../test/setup";
 import { signupRequest } from "./signup.test";
 
 const signinRequest = (email: string, password: string) =>
-  request(app).post("/api/users/signin").send({
+  request(createApp()).post("/api/users/signin").send({
     email,
     password,
   });

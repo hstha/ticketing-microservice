@@ -1,10 +1,9 @@
-import express, { Request, Response } from "express";
+import express, { NextFunction, Request, Response } from "express";
 import { body } from "express-validator";
 import jwt from "jsonwebtoken";
-// use as npm package
-import { BadRequest, validateRequest } from "../../../common/src";
+import { validateRequest } from "@hstha-ticketing/common";
 import { User } from "../models/user";
-import { Password } from "../services";
+import { Password, ValidationError } from "@h-stha/utils";
 
 const router = express.Router();
 
@@ -18,13 +17,13 @@ router.post(
       .withMessage("You must supply a password"),
   ],
   validateRequest,
-  async (req: Request, res: Response) => {
+  async (req: Request, res: Response, next: NextFunction) => {
     const { email, password } = req.body;
 
     const existingUser = await User.findOne({ email });
 
     if (!existingUser) {
-      throw new BadRequest("Invalid Credentials");
+      throw new ValidationError("Invalid Credentials", "bad-request-error");
     }
 
     const passwordMatched = await Password.compare(
@@ -33,7 +32,7 @@ router.post(
     );
 
     if (!passwordMatched) {
-      throw new BadRequest("Invalid Credentials");
+      throw new ValidationError("Invalid Credentials", "bad-request-error");
     }
 
     // generating jwt

@@ -1,8 +1,8 @@
 import request from "supertest";
-import { app } from "../../app";
+import { createApp } from "../../test/setup";
 
 export const signupRequest = (email: string, password: string) =>
-  request(app).post("/api/users/signup").send({
+  request(createApp()).post("/api/users/signup").send({
     email,
     password,
   });

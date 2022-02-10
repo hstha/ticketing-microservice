@@ -1,6 +1,5 @@
 import express from "express";
-// use as npm package
-import { currentUser } from "../../../common/src";
+import { currentUser } from "@hstha-ticketing/common";
 
 const router = express.Router();
 

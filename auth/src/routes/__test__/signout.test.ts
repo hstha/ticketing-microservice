@@ -1,9 +1,9 @@
 import request from "supertest";
-import { app } from "../../app";
+import { createApp } from "../../test/setup";
 import { signupRequest } from "./signup.test";
 
 export const signoutRequest = () =>
-  request(app).post("/api/users/signout").send({});
+  request(createApp()).post("/api/users/signout").send({});
 
 it("clears the cookie after signing out", async () => {
   await signupRequest("test@test.com", "password").expect(201);

@@ -294,6 +294,24 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
+"@h-stha/utils@^1.0.12":
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/@h-stha/utils/-/utils-1.0.12.tgz#32ab7b7de866b1e94f19b75b457f7d2d042a17e4"
+  integrity sha512-YTIUADkOGN8bJ77j1L8oQzZIC0xMaJADxD4KqZcbNzi+fRT8ZM5YH7bARxVutDVBchlXisyeCXUkvWehs05XYA==
+  dependencies:
+    express "^4.17.2"
+
+"@hstha-ticketing/common@^1.0.17":
+  version "1.0.17"
+  resolved "https://registry.yarnpkg.com/@hstha-ticketing/common/-/common-1.0.17.tgz#1415d16a866637165d8955e5681d2d0d3841bb1e"
+  integrity sha512-bo9DOpnx83av8BDxRNOw9XLdcg+/p8/ZuU+zOqPAPlZaB8T5rTCbY6Tjgva3NYn4+ubNSV570Wx7mceVUplo/Q==
+  dependencies:
+    "@h-stha/utils" "^1.0.12"
+    cookie-session "^2.0.0"
+    express "^4.17.2"
+    express-validator "^6.14.0"
+    jsonwebtoken "^8.5.1"
+
 "@istanbuljs/load-nyc-config@^1.0.0":
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/@istanbuljs/load-nyc-config/-/load-nyc-config-1.1.0.tgz#fd3db1d59ecf7cf121e80650bb86712f9b55eced"
