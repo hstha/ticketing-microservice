@@ -11,6 +11,9 @@ export const errorHandler = (
   res: ResponseParam,
   next: NextFunctionParam
 ) => {
+  // adding logging to server
+  console.error(err);
+
   if (err instanceof CustomError) {
     return err.send(res);
   }
